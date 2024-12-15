@@ -1,0 +1,62 @@
+title = 'tdback.net'
+baseURL = 'https://tdback.net'
+theme = 'hugo-blog-awesome'
+languageCode = 'en-us'
+defaultContentLanguage = 'en-us'
+
+[params]
+  sitename = 'tdbacks blog'
+  defaultColor = 'auto'
+  toc = false
+  tocOpen = false
+  goToTop = true
+  dateFormat = '2006-01-02'
+  mainSections = ['posts']
+  rssFeedDescription = 'full'
+  [params.author]
+    avatar = 'images/calvin_and_hobbes.jpg'
+    intro = 'Tyler Dunneback'
+    description = '*nix hobbyist and avid self-hoster'
+    name = 'Tyler Dunneback'
+  [params.webmanifest]
+    name = 'tdback.net'
+    display = 'standalone'
+  [[params.socialIcons]]
+    name = 'gitea'
+    url = 'https://codeberg.org/tdback'
+  [[params.socialIcons]]
+    name = 'mastodon'
+    url = 'https://social.tdback.net/@tdback'
+  [[params.socialIcons]]
+    name = 'rss'
+    url = '/index.xml'
+
+[menus]
+  [[menus.main]]
+    pageRef = '/'
+    name = 'Home'
+    url = '/'
+    weight = 10
+  [[menus.main]]
+    pageRef = 'posts'
+    name = 'Posts'
+    url = '/posts/'
+    weight = 20
+  [[menus.main]]
+    pageRef = 'about'
+    name = 'About'
+    url = '/about/'
+    weight = 30
+  [[menus.main]]
+    pageRef = 'rss'
+    name = 'RSS'
+    url = '/index.xml'
+    weight = 40
+
+[markup]
+  [markup.highlight]
+    noClasses = false
+    codeFences = true
+    guessSyntax = true
+  [markup.goldmark.renderer]
+    unsafe = true
