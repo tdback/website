@@ -14,6 +14,20 @@
           buildInputs = with pkgs; [
             hugo
           ];
+
+          shellHook = ''
+            SITE="$HOME/projects/tdback.net"
+
+            new-post() {
+              hugo new "posts/$1/index.md"
+              $EDITOR "$SITE/content/posts/$1/index.md"
+            }
+
+            del-post() {
+              POST="$SITE/content/posts/$1"
+              [ -d $POST ] && rm -r $POST
+            }
+          '';
         };
       });
 }
