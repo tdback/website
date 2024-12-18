@@ -20,7 +20,7 @@ operating system development - and developing
 
 You can find my current and past projects on
 [Codeberg](https://codeberg.org/tdback). In fact, you can view all of the
-source code for this site in its
+source code for this site from its
 [git repository](https://codeberg.org/tdback/website).
 
 When away from the keyboard, I enjoy spending time with my beautiful wife and

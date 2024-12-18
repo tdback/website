@@ -16,7 +16,7 @@ defaultContentLanguage = 'en-us'
   [params.author]
     avatar = 'images/calvin_and_hobbes.jpg'
     intro = 'Tyler Dunneback'
-    description = '*nix hobbyist and avid self-hoster'
+    description = 'Sharing technical notes and other thoughts'
     name = 'Tyler Dunneback'
   [params.webmanifest]
     name = 'tdback.net'
