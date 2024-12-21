@@ -42,8 +42,8 @@ While I've traditionally thrown my site's index.html file onto GitHub Pages
 and/or Codeberg Pages, as a hobbyist self-hoster I'd be doing an injustice by
 not hosting the server on my own hardware. While I would encourage others to
 take advantage of free static site hosting services such as
-[Codeberg Pages](https://codeberg.page/), I've found that I quite enjoy the
-responsiblities, challenges, and learning opportunities associated with
+[GitHub Pages](https://pages.github.com/), I've found that I quite enjoy the
+responsibilities, challenges, and learning opportunities associated with
 self-hosting.
 
 ## Closing Thoughts
