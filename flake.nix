@@ -1,33 +1,39 @@
 {
-  inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    flake-utils.url = "github:numtide/flake-utils";
-  };
+  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-  outputs = { ... }@inputs:
-    inputs.flake-utils.lib.eachDefaultSystem (system:
-      let
-        pkgs = import inputs.nixpkgs { inherit system; };
-      in
-      {
-        devShells.default = pkgs.mkShell {
-          buildInputs = with pkgs; [
-            hugo
-          ];
+  outputs =
+    { nixpkgs, ... }:
+    let
+      supportedSystems = [ "x86_64-linux" ];
+      eachSystem = nixpkgs.lib.genAttrs supportedSystems;
+    in
+    {
+      devShells = eachSystem (
+        system:
+        let
+          pkgs = import nixpkgs { inherit system; };
+        in
+        {
+          default = pkgs.mkShell {
+            buildInputs = with pkgs; [
+              hugo
+            ];
 
-          shellHook = ''
-            SITE="$HOME/projects/tdback.net"
+            shellHook = ''
+              SITE="$HOME/projects/tdback.net"
 
-            new-post() {
-              hugo new "posts/$1/index.md"
-              $EDITOR "$SITE/content/posts/$1/index.md"
-            }
+              new-post() {
+                hugo new "posts/$1/index.md"
+                $EDITOR "$SITE/content/posts/$1/index.md"
+              }
 
-            del-post() {
-              POST="$SITE/content/posts/$1"
-              [ -d $POST ] && rm -r $POST
-            }
-          '';
-        };
-      });
+              del-post() {
+                POST="$SITE/content/posts/$1"
+                [ -d $POST ] && rm -r $POST
+              }
+            '';
+          };
+        }
+      );
+    };
 }
