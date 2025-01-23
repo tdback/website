@@ -4,7 +4,10 @@
   outputs =
     { nixpkgs, ... }:
     let
-      supportedSystems = [ "x86_64-linux" ];
+      supportedSystems = [
+        "aarch64-linux"
+        "x86_64-linux"
+      ];
       eachSystem = nixpkgs.lib.genAttrs supportedSystems;
     in
     {
@@ -17,6 +20,7 @@
           default = pkgs.mkShell {
             buildInputs = with pkgs; [
               hugo
+              rsync
             ];
 
             shellHook = ''
@@ -30,6 +34,10 @@
               del-post() {
                 POST="$SITE/content/posts/$1"
                 [ -d $POST ] && rm -r $POST
+              }
+
+              deploy() {
+                hugo && rsync -avz --delete public/ thor:/var/www/tdback.net/
               }
             '';
           };
