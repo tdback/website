@@ -15,7 +15,7 @@ Hello friends, and welcome [back] to my blog! It has been quite some time since
 my last post, and I thought I'd take a moment to catch everyone up to speed on
 the changes I've made since then.
 
-## A "new" website.
+## A "New" Website.
 For those reading via RSS, you will notice little to no change. However, if you
 point your browser to https://tdback.net, things will look noticeably
 different.
@@ -51,5 +51,3 @@ So far my experience with Hugo has been great! After just a few hours I had a
 working site, RSS feed, and an established workflow for writing. If you're
 interested in the technical details of how I host my website, read onwards to
 [part two](/posts/switching-to-hugo-two/).
-
-Happy hacking!
