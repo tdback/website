@@ -27,7 +27,7 @@
               SITE="$HOME/projects/tdback.net"
 
               new-post() {
-                hugo new "posts/$1/index.md"
+                hugo new "$SITE/content/posts/$1/index.md"
                 $EDITOR "$SITE/content/posts/$1/index.md"
               }
 
