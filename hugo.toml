@@ -22,8 +22,8 @@ defaultContentLanguage = 'en-us'
     name = 'tdback.net'
     display = 'standalone'
   [[params.socialIcons]]
-    name = 'gitea'
-    url = 'https://codeberg.org/tdback'
+    name = 'github'
+    url = 'https://github.com/tdback'
   [[params.socialIcons]]
     name = 'mastodon'
     url = 'https://social.tdback.net/@tdback'
