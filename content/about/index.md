@@ -3,7 +3,7 @@ title = 'About'
 author = 'Tyler Dunneback'
 +++
 
-Greetings, my name is Tyler Dunneback!
+Greetings, my name is Tyler Dunneback.
 
 I am passionate about decentralization, data sovereignty, self-hosting, and
 privacy. As a result, I run a lot of my own infrastructure. You can find the
