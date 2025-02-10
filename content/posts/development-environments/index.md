@@ -5,7 +5,7 @@ date = '2025-02-09T19:59:55-05:00'
 draft = false
 +++
 
-Recently I decided to fire up Emacs, [declare bankruptcy](https://www.emacswiki.org/emacs/DotEmacsBankruptcy) on my old config, and [rewrite it again from scratch](https://github.com/tdback/emacs.d). I thought I would share how I integrate Emacs into my workflow with Nix to create seamless, reproducible development environments for hacking on projects.
+Recently I decided to fire up Emacs, [declare bankruptcy](https://www.emacswiki.org/emacs/DotEmacsBankruptcy) on my old config, and [rewrite it again from scratch](https://github.com/tdback/emacs.d). I thought I would share how I use Emacs alongside Nix to create seamless, reproducible development environments for hacking on projects.
 
 # Setting Things Up
 The secret sauce here is [direnv](https://direnv.net/). `direnv` allows us to load and unload environment variables depending on the current directory. When paired with Nix, we can automatically handle the environment variables for per-project dependencies specified in our `flake.nix` or `shell.nix` files.
