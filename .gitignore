@@ -1,3 +1,5 @@
 /public
 /resources
-/.direnv/
+/result
+/.direnv
+/.hugo_build.lock
