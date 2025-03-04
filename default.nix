@@ -1,12 +1,13 @@
 {
   hugo,
+  lib,
   stdenv,
   self ? null
 }:
 stdenv.mkDerivation {
   pname = "tdback-net";
   version = if self ? rev then self.rev else "dirty";
-  src = ./.;
+  src = lib.cleanSource ./.;
 
   nativeBuildInputs = [ hugo ];
 
