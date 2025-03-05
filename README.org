@@ -1,8 +1,16 @@
 * tdback.net
 Source code for my personal website/blog.
 
-To build and deploy to my web server:
-#+begin_src shell
+Build the site:
+#+begin_src shell :results output
   nix build ".?submodules=1#" -L
-  rsync -avz --delete result/ thor:/var/www/tdback.net/
 #+end_src
+
+#+RESULTS:
+
+Deploy to my web server:
+#+begin_src shell :results output
+  rsync -qavz --delete result/ thor:/var/www/tdback.net/
+#+end_src
+
+#+RESULTS:
