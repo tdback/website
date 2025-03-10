@@ -54,13 +54,15 @@ And enable the global minor mode on startup in `~/.emacs.d/init.el`:
 Let's create a new project that will setup a development environment for working with Rust. In our example `flake.nix` file, we'll include an overlay to pull in the latest stable Rust toolchain and `rust-analyzer` for LSP support in Emacs:
 ```nix
 {
-  inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    rust-overlay.url = "github:oxalica/rust-overlay";
-  };
+  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+  inputs.rust-overlay.url = "github:oxalica/rust-overlay";
 
   outputs =
-    { nixpkgs, ... }:
+    {
+      nixpkgs,
+      rust-overlay,
+      ...
+    }:
     let
       supportedSystems = [ "x86_64-linux" ];
       eachSystem = nixpkgs.lib.genAttrs supportedSystems;
@@ -75,12 +77,14 @@ Let's create a new project that will setup a development environment for working
           };
         in
         {
-          default = pkgs.mkShell {
-            buildInputs = with pkgs; [
-              rust-analyzer
-              rust-bin.stable.latest.default
-            ];
-          };
+          default =
+            with pkgs;
+            mkShell {
+              buildInputs = with pkgs; [
+                rust-analyzer
+                rust-bin.stable.latest.default
+              ];
+            };
         }
       );
     };
@@ -98,10 +102,10 @@ Compare this to working on the example project without `direnv`: we would first 
 
 Emacs will even display a helpful message in the minibuffer when `direnv` updates your environment variables. Here's a snippet from my `*Messages*` buffer of `direnv` loading a Nix environment when I navigate to one of my projects:
 ```
-direnv: +AR +AR_FOR_TARGET +AS +AS_FOR_TARGET +CC +CC_FOR_TARGET +CONFIG_SHELL +CXX +CXX_FOR_TARGET +HOST_PATH +IN_NIX_SHELL +LD +LD_FOR_TARGET +NIX_BINTOOLS +NIX_BINTOOLS_FOR_TARGET +NIX_BINTOOLS_WRAPPER_TARGET_HOST_x86_64_unknown_linux_gnu +NIX_BINTOOLS_WRAPPER_TARGET_TARGET_x86_64_unknown_linux_gnu +NIX_BUILD_CORES +NIX_CC +NIX_CC_FOR_TARGET +NIX_CC_WRAPPER_TARGET_HOST_x86_64_unknown_linux_gnu +NIX_CC_WRAPPER_TARGET_TARGET_x86_64_unknown_linux_gnu +NIX_CFLAGS_COMPILE +NIX_ENFORCE_NO_NATIVE +NIX_HARDENING_ENABLE +NIX_LDFLAGS +NIX_LDFLAGS_FOR_TARGET +NIX_STORE +NM +NM_FOR_TARGET +OBJCOPY +OBJCOPY_FOR_TARGET +OBJDUMP +OBJDUMP_FOR_TARGET +RANLIB +RANLIB_FOR_TARGET +READELF +READELF_FOR_TARGET +SIZE +SIZE_FOR_TARGET +SOURCE_DATE_EPOCH +STRINGS +STRINGS_FOR_TARGET +STRIP +STRIP_FOR_TARGET +__structuredAttrs +buildInputs +buildPhase +builder +cmakeFlags +configureFlags +depsBuildBuild +depsBuildBuildPropagated +depsBuildTarget +depsBuildTargetPropagated +depsHostHost +depsHostHostPropagated +depsTargetTarget +depsTargetTargetPropagated +doCheck +doInstallCheck +dontAddDisableDepTrack +mesonFlags +name +nativeBuildInputs +out +outputs +patches +phases +preferLocalBuild +propagatedBuildInputs +propagatedNativeBuildInputs +shell +shellHook +stdenv +strictDeps +system ~PATH ~XDG_DATA_DIRS (~/Projects → ~/Projects/rebound)
+direnv: +AR +AR_FOR_TARGET +AS +AS_FOR_TARGET +CC +CC_FOR_TARGET +CONFIG_SHELL +CXX +CXX_FOR_TARGET +HOST_PATH +IN_NIX_SHELL +LD +LD_FOR_TARGET +NIX_BINTOOLS +NIX_BINTOOLS_FOR_TARGET +NIX_BINTOOLS_WRAPPER_TARGET_HOST_x86_64_unknown_linux_gnu +NIX_BINTOOLS_WRAPPER_TARGET_TARGET_x86_64_unknown_linux_gnu +NIX_BUILD_CORES +NIX_CC +NIX_CC_FOR_TARGET +NIX_CC_WRAPPER_TARGET_HOST_x86_64_unknown_linux_gnu +NIX_CC_WRAPPER_TARGET_TARGET_x86_64_unknown_linux_gnu +NIX_CFLAGS_COMPILE +NIX_ENFORCE_NO_NATIVE +NIX_HARDENING_ENABLE +NIX_LDFLAGS +NIX_LDFLAGS_FOR_TARGET +NIX_STORE +NM +NM_FOR_TARGET +OBJCOPY +OBJCOPY_FOR_TARGET +OBJDUMP +OBJDUMP_FOR_TARGET +RANLIB +RANLIB_FOR_TARGET +READELF +READELF_FOR_TARGET +SIZE +SIZE_FOR_TARGET +SOURCE_DATE_EPOCH +STRINGS +STRINGS_FOR_TARGET +STRIP +STRIP_FOR_TARGET +__structuredAttrs +buildInputs +buildPhase +builder +cmakeFlags +configureFlags +depsBuildBuild +depsBuildBuildPropagated +depsBuildTarget +depsBuildTargetPropagated +depsHostHost +depsHostHostPropagated +depsTargetTarget +depsTargetTargetPropagated +doCheck +doInstallCheck +dontAddDisableDepTrack +mesonFlags +name +nativeBuildInputs +out +outputs +patches +phases +preferLocalBuild +propagatedBuildInputs +propagatedNativeBuildInputs +shell +shellHook +stdenv +strictDeps +system ~PATH ~XDG_DATA_DIRS (~/Projects → ~/Projects/fasten)
 ```
 
 And here's the snippet of `direnv` unloading the Nix environment when I navigate outside of the project:
 ```
-direnv: ~PATH ~XDG_DATA_DIRS -AR -AR_FOR_TARGET -AS -AS_FOR_TARGET -CC -CC_FOR_TARGET -CONFIG_SHELL -CXX -CXX_FOR_TARGET -HOST_PATH -IN_NIX_SHELL -LD -LD_FOR_TARGET -NIX_BINTOOLS -NIX_BINTOOLS_FOR_TARGET -NIX_BINTOOLS_WRAPPER_TARGET_HOST_x86_64_unknown_linux_gnu -NIX_BINTOOLS_WRAPPER_TARGET_TARGET_x86_64_unknown_linux_gnu -NIX_BUILD_CORES -NIX_CC -NIX_CC_FOR_TARGET -NIX_CC_WRAPPER_TARGET_HOST_x86_64_unknown_linux_gnu -NIX_CC_WRAPPER_TARGET_TARGET_x86_64_unknown_linux_gnu -NIX_CFLAGS_COMPILE -NIX_ENFORCE_NO_NATIVE -NIX_HARDENING_ENABLE -NIX_LDFLAGS -NIX_LDFLAGS_FOR_TARGET -NIX_STORE -NM -NM_FOR_TARGET -OBJCOPY -OBJCOPY_FOR_TARGET -OBJDUMP -OBJDUMP_FOR_TARGET -RANLIB -RANLIB_FOR_TARGET -READELF -READELF_FOR_TARGET -SIZE -SIZE_FOR_TARGET -SOURCE_DATE_EPOCH -STRINGS -STRINGS_FOR_TARGET -STRIP -STRIP_FOR_TARGET -__structuredAttrs -buildInputs -buildPhase -builder -cmakeFlags -configureFlags -depsBuildBuild -depsBuildBuildPropagated -depsBuildTarget -depsBuildTargetPropagated -depsHostHost -depsHostHostPropagated -depsTargetTarget -depsTargetTargetPropagated -doCheck -doInstallCheck -dontAddDisableDepTrack -mesonFlags -name -nativeBuildInputs -out -outputs -patches -phases -preferLocalBuild -propagatedBuildInputs -propagatedNativeBuildInputs -shell -shellHook -stdenv -strictDeps -system (~/Projects/rebound/src → ~/Projects)
+direnv: ~PATH ~XDG_DATA_DIRS -AR -AR_FOR_TARGET -AS -AS_FOR_TARGET -CC -CC_FOR_TARGET -CONFIG_SHELL -CXX -CXX_FOR_TARGET -HOST_PATH -IN_NIX_SHELL -LD -LD_FOR_TARGET -NIX_BINTOOLS -NIX_BINTOOLS_FOR_TARGET -NIX_BINTOOLS_WRAPPER_TARGET_HOST_x86_64_unknown_linux_gnu -NIX_BINTOOLS_WRAPPER_TARGET_TARGET_x86_64_unknown_linux_gnu -NIX_BUILD_CORES -NIX_CC -NIX_CC_FOR_TARGET -NIX_CC_WRAPPER_TARGET_HOST_x86_64_unknown_linux_gnu -NIX_CC_WRAPPER_TARGET_TARGET_x86_64_unknown_linux_gnu -NIX_CFLAGS_COMPILE -NIX_ENFORCE_NO_NATIVE -NIX_HARDENING_ENABLE -NIX_LDFLAGS -NIX_LDFLAGS_FOR_TARGET -NIX_STORE -NM -NM_FOR_TARGET -OBJCOPY -OBJCOPY_FOR_TARGET -OBJDUMP -OBJDUMP_FOR_TARGET -RANLIB -RANLIB_FOR_TARGET -READELF -READELF_FOR_TARGET -SIZE -SIZE_FOR_TARGET -SOURCE_DATE_EPOCH -STRINGS -STRINGS_FOR_TARGET -STRIP -STRIP_FOR_TARGET -__structuredAttrs -buildInputs -buildPhase -builder -cmakeFlags -configureFlags -depsBuildBuild -depsBuildBuildPropagated -depsBuildTarget -depsBuildTargetPropagated -depsHostHost -depsHostHostPropagated -depsTargetTarget -depsTargetTargetPropagated -doCheck -doInstallCheck -dontAddDisableDepTrack -mesonFlags -name -nativeBuildInputs -out -outputs -patches -phases -preferLocalBuild -propagatedBuildInputs -propagatedNativeBuildInputs -shell -shellHook -stdenv -strictDeps -system (~/Projects/fasten → ~/Projects)
 ```
