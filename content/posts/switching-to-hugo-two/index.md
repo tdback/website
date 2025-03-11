@@ -26,7 +26,7 @@ same, regardless of the server it's running on. This alleviates the headache of
 dependency management and reduces setup times down to just
 `nixos-rebuild switch`, should I have the need to move my website to different
 hardware. The [nix flake for my system
-configurations](https://github.com/tdback/nix-config) is tracked in a remote
+configurations](https://git.tdback.net/nix-config) is tracked in a remote
 repository with `git`, making configuration changes a single `git pull` away.
 
 The following module defined in `modules/services/proxy/default.nix` enables
@@ -34,14 +34,20 @@ the caddy service using the `caddy` package found in
 [nixpkgs](https://search.nixos.org/packages?channel=24.11&query=caddy),
 and opens up both TCP ports 80 and 443 to accept inbound HTTP/S traffic.
 ```nix
-{ pkgs, ... }:
+{
+  pkgs,
+  ...
+}:
 {
   services.caddy = {
     enable = true;
     package = pkgs.caddy;
   };
 
-  networking.firewall.allowTCPPorts = [ 80 443 ];
+  networking.firewall.allowTCPPorts = [
+    80
+    443
+  ];
 }
 ```
 
@@ -53,7 +59,6 @@ server. I've also enabled both gzip and zstd support for compressing web server
 responses.
 
 ```nix
-{ ... }:
 {
   services.caddy.virtualHosts = {
     "tdback.net".extraConfig = ''

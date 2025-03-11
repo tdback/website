@@ -21,14 +21,15 @@ point your browser to https://tdback.net, things will look noticeably
 different.
 
 Some may recall that my old website employed the use of the
-[TiddlyWiki](https://tiddlywiki.com), a wonderful piece of software that allows
-you to create a non-linear notebook for organizing and sharing complex
-information. The downside to using a TiddlyWiki as my primary blogging platform
-was the need to do almost everything in the browser. As someone who spends a
-majority of their time editing text inside [neovim](https://neovim.io), I found
-myself sorely missing my beloved [vim motions](https://vim.rtorr.com/) and the
-ability to quickly move around my system using tools such as `tmux` or `fzf`.
-In short: I missed my terminal.
+[TiddlyWiki](https://tiddlywiki.com), a wonderful piece of software
+that allows you to create a non-linear notebook for organizing and
+sharing complex information. The downside to using a TiddlyWiki as my
+primary blogging platform was the need to do almost everything in the
+browser. As someone who spends a majority of their time editing text
+inside [neovim](https://neovim.io), I found myself sorely missing my
+beloved [vim motions](https://vim.rtorr.com/) and the ability to
+quickly move around my system using tools such as `tmux` or `fzf`. In
+short: I missed my terminal.
 
 When researching static site generators, I stumbled across the ever so popular
 [Hugo](https://gohugo.io). I immediately found it quite compelling: writing an
@@ -38,13 +39,7 @@ also comes with a built-in RSS feed generator, meaning that I didn't have to
 [write one myself](https://old.tdback.net/#Hacking%20on%20RSS) (although I
 quite enjoyed doing so).
 
-While I've traditionally thrown my site's index.html file onto GitHub Pages
-and/or Codeberg Pages, as a hobbyist self-hoster I'd be doing an injustice by
-not hosting the server on my own hardware. While I would encourage others to
-take advantage of free static site hosting services such as
-[GitHub Pages](https://pages.github.com/), I've found that I quite enjoy the
-responsibilities, challenges, and learning opportunities associated with
-self-hosting.
+While I've traditionally thrown my site's index.html file onto Codeberg Pages, as a hobbyist self-hoster I'd be doing an injustice by not hosting the server on my own hardware. While I would encourage others to take advantage of free static site hosting services such as [Codeberg Pages](https://codeberg.page/), I've found that I quite enjoy the responsibilities, challenges, and learning opportunities associated with self-hosting.
 
 ## Closing Thoughts
 So far my experience with Hugo has been great! After just a few hours I had a

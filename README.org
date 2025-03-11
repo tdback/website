@@ -1,4 +1,6 @@
-* tdback.net
+#+TITLE: tdback.net
+#+AUTHOR: Tyler Dunneback
+#+OPTIONS: toc:nil
 Source code for my personal website/blog.
 
 Build the site:
