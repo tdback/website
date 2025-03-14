@@ -14,7 +14,7 @@ I enjoy systems administration, infrastructure, and programming. I currently
 work as a systems administrator and IT specialist.
 
 You can find my current and past projects on my [personal git
-server](https://gffit.tdback.net) or [Codeberg](https://codeberg.org/tdback).
+server](https://git.tdback.net) or [Codeberg](https://codeberg.org/tdback).
 The source code for this website is also publicly
 [available](https://git.tdback.net/website).
 
