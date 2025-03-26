@@ -2,7 +2,7 @@
   hugo,
   lib,
   stdenv,
-  self ? null
+  self ? null,
 }:
 stdenv.mkDerivation {
   pname = "tdback-net";
@@ -12,10 +12,18 @@ stdenv.mkDerivation {
   nativeBuildInputs = [ hugo ];
 
   buildPhase = ''
+    runHook preBuild
+
     hugo build --minify
+
+    runHook postBuild
   '';
 
   installPhase = ''
+    runHook preInstall
+
     mv public $out
+
+    runHook postInstall
   '';
 }
