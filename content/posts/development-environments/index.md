@@ -77,7 +77,7 @@ Let's create a new project that will setup a development environment for working
           default =
             with pkgs;
             mkShell {
-              buildInputs = with pkgs; [
+              buildInputs = [
                 go
                 gopls
               ];
